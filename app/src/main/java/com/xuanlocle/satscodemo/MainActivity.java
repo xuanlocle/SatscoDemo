@@ -43,6 +43,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.zxing.WriterException;
+import com.yandex.mapkit.Animation;
+import com.yandex.mapkit.MapKitFactory;
+import com.yandex.mapkit.map.CameraPosition;
+import com.yandex.mapkit.mapview.MapView;
 
 import org.w3c.dom.Document;
 
@@ -52,8 +56,7 @@ import java.util.List;
 import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
 
-public class MainActivity extends AppCompatActivity  implements
-        OnMapReadyCallback {
+public class MainActivity extends AppCompatActivity          {
     ListView lstView;
     EditText edtAddress;
     ImageView imvQRCode;
@@ -62,27 +65,60 @@ public class MainActivity extends AppCompatActivity  implements
     TextView tvDiscount,tvDiemDen,tvInvolveNo;
     Button btnDSatsco,btnHuy;
     ConstraintLayout const1Dialog,const2Dialog,const3Dialog;
-    private GoogleMap mMap;
+//    private GoogleMap mMap;
     double lattitude = 10.8139884, longitude = 106.6648174;
     GoogleApiClient mGoogleApiClient;
     LocationRequest mLocationRequest;
     public final static int MILLISECONDS_PER_SECOND = 10;
     public final static int MINUTESS = 60 * MILLISECONDS_PER_SECOND;
     boolean THE_FIRST_TIME_LOAD_LOCATION = true;
+
+
+
+
+    private MapView mapView;
+    private final String MAPKIT_API_KEY = "38e6cc01-366c-4616-a45b-7911a3c57d80";
+    private final com.yandex.mapkit.geometry.Point TARGET_LOCATION = new com.yandex.mapkit.geometry.Point(10.816286, 106.664140);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        MapKitFactory.setApiKey(MAPKIT_API_KEY);
+        MapKitFactory.initialize(this);
         super.onCreate(savedInstanceState);
         final Context context = this;
         setContentView(R.layout.activity_main);
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+//                .findFragmentById(R.id.map);
+//        mapFragment.getMapAsync(this);
 //        Intent intent = new Intent(getApplicationContext(),MapsActivity.class);
 //        startActivity(intent);
 
 //            Fragment newFragment = new DebugExampleTwoFragment();
 //            FragmentTransaction ft = getFragmentManager().beginTransaction();
 //            ft.add(CONTENT_VIEW_ID, newFragment).commit();
+
+        /**
+         * Set the api key before calling initialize on MapKitFactory.
+         * It is recommended to set api key in the Application.onCreate method,
+         * but here we do it in each activity to make examples isolated.
+         */
+        /**
+         * Initialize the library to load required native libraries.
+         * It is recommended to initialize the MapKit library in the Activity.onCreate method
+         * Initializing in the Application.onCreate method may lead to extra calls and increased battery use.
+         */
+        // Now MapView can be created.
+//        setContentView(R.layout.activity_map_yandex);
+
+        mapView = (MapView)findViewById(R.id.mapview);
+
+        // And to show what can be done with it, we move the camera to the center of Saint Petersburg.
+        mapView.getMap().move(
+                new CameraPosition(TARGET_LOCATION, 14.0f, 0.0f, 0.0f),
+                new Animation(Animation.Type.SMOOTH, 5),
+                null);
+
+
 
         this.arrayAdapterListView();
         tvDiscount = (TextView)findViewById(R.id.tvDiscount);
@@ -152,7 +188,21 @@ public class MainActivity extends AppCompatActivity  implements
 
 
     }
+    @Override
+    protected void onStop() {
+        // Activity onStop call must be passed to both MapView and MapKit instance.
+        mapView.onStop();
+        MapKitFactory.getInstance().onStop();
+        super.onStop();
+    }
 
+    @Override
+    protected void onStart() {
+        // Activity onStart call must be passed to both MapView and MapKit instance.
+        super.onStart();
+        MapKitFactory.getInstance().onStart();
+        mapView.onStart();
+    }
     // This method use an ArrayAdapter to add data in ListView.
     private void arrayAdapterListView()
     {
@@ -198,50 +248,50 @@ public class MainActivity extends AppCompatActivity  implements
         }
     }
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        // Add a marker in Sydney and move the camera
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(this,
-                    Manifest.permission.ACCESS_FINE_LOCATION)
-                    == PackageManager.PERMISSION_GRANTED) {
-                //Location Permission already granted
-//                buildGoogleApiClient();
-                mMap.setMyLocationEnabled(true);
-            } else {
-                //Request Location Permission
-//                checkLocationPermission();
-            }
-        } else {
-//            buildGoogleApiClient();
-            mMap.setMyLocationEnabled(true);
-        }
-        LatLng sydney = new LatLng(lattitude,longitude);
-
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Current"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,16));
-//        mMap.setMinZoomPreference(16);
-
-//        GMapV2Direction md = new GMapV2Direction();
-//        LatLng sourcePosition, destPosition;
-//        sourcePosition = new LatLng(lattitude,longitude);
-//        destPosition = new LatLng(10.8114523,106.6642044); //the coffee house hong ha
-//        Document doc = md.getDocument(sourcePosition, destPosition,
-//                GMapV2Direction.MODE_DRIVING);
-//
-//        ArrayList<LatLng> directionPoint = md.getDirection(doc);
-//        PolylineOptions rectLine = new PolylineOptions().width(3).color(
-//                Color.RED);
-//
-//        for (int i = 0; i < directionPoint.size(); i++) {
-//            rectLine.add(directionPoint.get(i));
+//    @Override
+//    public void onMapReady(GoogleMap googleMap) {
+//        mMap = googleMap;
+//        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+//        // Add a marker in Sydney and move the camera
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            if (ContextCompat.checkSelfPermission(this,
+//                    Manifest.permission.ACCESS_FINE_LOCATION)
+//                    == PackageManager.PERMISSION_GRANTED) {
+//                //Location Permission already granted
+////                buildGoogleApiClient();
+//                mMap.setMyLocationEnabled(true);
+//            } else {
+//                //Request Location Permission
+////                checkLocationPermission();
+//            }
+//        } else {
+////            buildGoogleApiClient();
+//            mMap.setMyLocationEnabled(true);
 //        }
+//        LatLng sydney = new LatLng(lattitude,longitude);
 //
-//        Polyline polylin = mMap.addPolyline(rectLine);
-
-
-
-    }
+//        mMap.addMarker(new MarkerOptions().position(sydney).title("Current"));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,16));
+////        mMap.setMinZoomPreference(16);
+//
+////        GMapV2Direction md = new GMapV2Direction();
+////        LatLng sourcePosition, destPosition;
+////        sourcePosition = new LatLng(lattitude,longitude);
+////        destPosition = new LatLng(10.8114523,106.6642044); //the coffee house hong ha
+////        Document doc = md.getDocument(sourcePosition, destPosition,
+////                GMapV2Direction.MODE_DRIVING);
+////
+////        ArrayList<LatLng> directionPoint = md.getDirection(doc);
+////        PolylineOptions rectLine = new PolylineOptions().width(3).color(
+////                Color.RED);
+////
+////        for (int i = 0; i < directionPoint.size(); i++) {
+////            rectLine.add(directionPoint.get(i));
+////        }
+////
+////        Polyline polylin = mMap.addPolyline(rectLine);
+//
+//
+//
+//    }
 }
