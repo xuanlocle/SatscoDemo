@@ -50,7 +50,9 @@ import com.yandex.mapkit.mapview.MapView;
 
 import org.w3c.dom.Document;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import androidmads.library.qrgenearator.QRGContents;
@@ -74,7 +76,7 @@ public class MainActivity extends AppCompatActivity          {
     boolean THE_FIRST_TIME_LOAD_LOCATION = true;
 
 
-
+    TextView tvInvThoiGianDi,tvInvNgayLapHoaDon,tvInvNoiDi,tvInvNoiDen,tvInvKmDi,tvDiemDi,tvKmDi;
 
     private MapView mapView;
     private final String MAPKIT_API_KEY = "38e6cc01-366c-4616-a45b-7911a3c57d80";
@@ -119,7 +121,6 @@ public class MainActivity extends AppCompatActivity          {
                 null);
 
 
-
         this.arrayAdapterListView();
         tvDiscount = (TextView)findViewById(R.id.tvDiscount);
         tvDiemDen = (TextView)findViewById(R.id.tvDiemDen);
@@ -131,6 +132,17 @@ public class MainActivity extends AppCompatActivity          {
         const1Dialog = (ConstraintLayout)findViewById(R.id.constDialog);
         const2Dialog = (ConstraintLayout)findViewById(R.id.const2Dialog);
         const3Dialog = (ConstraintLayout)findViewById(R.id.const3Involve);
+
+
+
+        tvInvThoiGianDi = (TextView)findViewById(R.id.tvInvThoiGianDi);
+        tvInvNgayLapHoaDon = (TextView)findViewById(R.id.tvInvNgayLapHoaDon);
+        tvInvNoiDi = (TextView)findViewById(R.id.tvInvNoiDi);
+        tvInvNoiDen = (TextView)findViewById(R.id.tvInvNoiDen);
+        tvInvKmDi = (TextView)findViewById(R.id.tvInvKmDi);
+        tvDiemDi = (TextView)findViewById(R.id.tvDiemDi);
+        tvKmDi = (TextView)findViewById(R.id.tvKmDi);
+
 //        constraintMain = (ConstraintLayout)findViewById(R.id.constMain);
 //        edtAddress.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -170,6 +182,16 @@ public class MainActivity extends AppCompatActivity          {
                         Log.v("QRCODE", e.toString());
                     }
                 }
+
+                Date date = new Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+                SimpleDateFormat sdf2 = new SimpleDateFormat("hh:mm");
+                tvInvThoiGianDi.setText(sdf2.format(date.getTime()));
+                tvInvNgayLapHoaDon.setText(sdf.format(date.getTime()));
+                tvInvNoiDi.setText(tvDiemDi.getText());
+                tvInvNoiDen.setText(tvDiemDen.getText());
+                tvInvKmDi.setText(tvKmDi.getText());
+
                 const2Dialog.setVisibility(View.GONE);
                 const3Dialog.setVisibility(View.VISIBLE);
             }
@@ -237,6 +259,10 @@ public class MainActivity extends AppCompatActivity          {
     public void onBackPressed() {
 //        super.onBackPressed();
 //        Toast.makeText(getApplicationContext(), "Back Clicked", Toast.LENGTH_SHORT).show();
+
+        if(const1Dialog.getVisibility()==View.VISIBLE){
+            const1Dialog.setVisibility(View.GONE);
+        }else
         if(const2Dialog.getVisibility()==View.VISIBLE)
         {
             const2Dialog.setVisibility(View.GONE);

@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="@+id/textView19"
         app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="@+id/textView19"
-        app:layout_constraintTop_toBottomOf="@+id/textView33" />
+        app:layout_constraintTop_toBottomOf="@+id/tvInvKmDi" />
 
     <TextView
         android:id="@+id/textView9"
@@ -27,17 +27,17 @@
         app:layout_constraintEnd_toEndOf="@+id/textView19"
         app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="@+id/textView19"
-        app:layout_constraintTop_toBottomOf="@+id/textView35" />
+        app:layout_constraintTop_toBottomOf="@+id/tvInvTongTien" />
 
     <TextView
-        android:id="@+id/textView30"
+        android:id="@+id/tvInvNoiDen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/textView31"
-        app:layout_constraintTop_toBottomOf="@+id/textView29" />
+        app:layout_constraintTop_toBottomOf="@+id/tvInvNoiDi" />
 
     <TextView
         android:id="@+id/textView31"
@@ -187,7 +187,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
     <TextView
-        android:id="@+id/textView26"
+        android:id="@+id/tvInvThoiGianDi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
@@ -197,24 +197,24 @@
         app:layout_constraintTop_toBottomOf="@+id/tvInvolveNo" />
 
     <TextView
-        android:id="@+id/textView27"
+        android:id="@+id/tvInvNgayLapHoaDon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/textView15"
-        app:layout_constraintTop_toBottomOf="@+id/textView26" />
+        app:layout_constraintTop_toBottomOf="@+id/tvInvThoiGianDi" />
 
     <TextView
-        android:id="@+id/textView29"
+        android:id="@+id/tvInvNoiDi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/textView16"
-        app:layout_constraintTop_toBottomOf="@+id/textView27" />
+        app:layout_constraintTop_toBottomOf="@+id/tvInvNgayLapHoaDon" />
 
     <TextView
         android:id="@+id/textView32"
@@ -227,14 +227,14 @@
         app:layout_constraintTop_toBottomOf="@+id/textView31" />
 
     <TextView
-        android:id="@+id/textView33"
+        android:id="@+id/tvInvKmDi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/textView32"
-        app:layout_constraintTop_toBottomOf="@+id/textView30" />
+        app:layout_constraintTop_toBottomOf="@+id/tvInvNoiDen" />
 
     <TextView
         android:id="@+id/textView34"
@@ -243,11 +243,11 @@
         android:layout_marginEnd="8dp"
         android:text="Tổng tiền:"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/textView35"
-        app:layout_constraintTop_toTopOf="@+id/textView35" />
+        app:layout_constraintEnd_toStartOf="@+id/tvInvTongTien"
+        app:layout_constraintTop_toTopOf="@+id/tvInvTongTien" />
 
     <TextView
-        android:id="@+id/textView35"
+        android:id="@+id/tvInvTongTien"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -265,9 +265,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="VND"
-        app:layout_constraintBottom_toBottomOf="@+id/textView35"
-        app:layout_constraintStart_toEndOf="@+id/textView35"
-        app:layout_constraintTop_toTopOf="@+id/textView35" />
+        app:layout_constraintBottom_toBottomOf="@+id/tvInvTongTien"
+        app:layout_constraintStart_toEndOf="@+id/tvInvTongTien"
+        app:layout_constraintTop_toTopOf="@+id/tvInvTongTien" />
 
     <ImageView
         android:id="@+id/imvQRCode"

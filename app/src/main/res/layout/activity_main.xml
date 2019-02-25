@@ -193,10 +193,10 @@
                 android:text="ĐIỂM ĐẾN"
                 android:textSize="8sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+                app:layout_constraintTop_toBottomOf="@+id/tvDiemDi" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/tvKmDi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -204,7 +204,7 @@
                 android:text="0.8 km"
                 android:textSize="8sp"
                 app:layout_constraintStart_toEndOf="@+id/textView6"
-                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+                app:layout_constraintTop_toBottomOf="@+id/tvDiemDi" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -218,7 +218,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/tvDiemDi"
                 android:layout_width="wrap_content"
                 android:layout_height="19dp"
                 android:layout_marginStart="8dp"
@@ -249,8 +249,8 @@
                 android:textColor="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/textView5"
-                app:layout_constraintTop_toTopOf="@+id/textView5" />
+                app:layout_constraintStart_toEndOf="@+id/tvDiemDi"
+                app:layout_constraintTop_toTopOf="@+id/tvDiemDi" />
 
             <TextView
                 android:id="@+id/textView13"
